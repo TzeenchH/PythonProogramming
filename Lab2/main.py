@@ -23,6 +23,16 @@ class Employee:
         self.Estimate = random.randrange(0, 5)
         self.Salary = random.randrange(50000, 150000, 100)
 
+    def to_list(self):
+        return [self.fio, self.Position, self.Department, self.Estimate, self.Salary]
+
+    def to_object(self, field_list: list):
+        self.fio = str(field_list[0])
+        self.Position = str(field_list[1])
+        self.Department = str(field_list[2])
+        self.Estimate = float(field_list[3])
+        self.Salary = int(field_list[4])
+
 
 def get_report(employees_list: list) -> dict:
     """
@@ -59,17 +69,20 @@ def calculate_stats(dep_stats: list, employ: Employee) -> list:
     return dep_stats
 
 
-def create_fake_data(size: int) -> list:
+def create_fake_data(size: int, path: str):
     """
     Generate Employee list of specified size
+    :param path: path to create csv data file
     :param size: size of the list
-    :return: list of employees
     """
     temp: list = list()
     for _ in range(size):
         new_employ = Employee()
         temp.append(new_employ)
-    return temp
+    with open(path, 'w', newline='') as datafile:
+        writer = csv.writer(datafile, delimiter=';')
+        for row in temp:
+            writer.writerow(row.to_list())
 
 
 def csv_writer(data: dict, path: str, fieldnames: list):
@@ -80,10 +93,26 @@ def csv_writer(data: dict, path: str, fieldnames: list):
     :param path: path to save file
     """
     with open(path, 'w', newline='') as output:
-        writer = csv.writer(output, delimiter=' ', dialect='excel')
+        writer = csv.writer(output, dialect='excel')
         writer.writerow(fieldnames)
         for row in data:
             writer.writerow(data[row])
+
+
+def csv_reader(path: str):
+    """
+    Read CSV file and convert it to list of Employee objects
+    :param path: path to datafile
+    :return: list of employees
+    """
+    csv_list = list()
+    with open(path, 'r') as file_obj:
+        reader = csv.reader(file_obj, delimiter=';')
+        for row in reader:
+            emp = Employee()
+            emp.to_object(field_list=row)
+            csv_list.append(emp)
+    return csv_list
 
 
 def get_departments():
@@ -111,7 +140,9 @@ if __name__ == '__main__':
     variants = ['Departs', 'Create report', 'Save to CSV']
     headers = ['Department', 'Employees count', 'Minimal Salary', 'Maximal Salary', 'Average salary']
     report_dict: dict = dict()
-    employee_list = create_fake_data(100)
+    data_path = input('Input path to data:')
+    create_fake_data(100, data_path)
+    employee_list = csv_reader(data_path)
     ch = chooser(variants)
     if ch == variants[0]:
         get_departments()
@@ -122,7 +153,7 @@ if __name__ == '__main__':
             print(report_dict[r])
         ch = chooser(variants)
     if ch == variants[2]:
-        path = input('Path to output file:')
-        csv_writer(report_dict, path, headers)
+        report_path = input('Path to output file:')
+        csv_writer(report_dict, report_path, headers)
         print('That`s All Folks!')
         exit(0)

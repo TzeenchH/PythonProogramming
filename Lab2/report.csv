@@ -1,0 +1,6 @@
+Department "Employees count" "Minimal Salary" "Maximal Salary" "Average salary"
+Maintenance 21 52000 147200 101604.76
+DevOps 22 59400 140100 94563.64
+QA 20 52000 148000 97430.0
+Develop 24 56900 149600 102612.5
+"EndUser service" 13 50600 148200 101484.62
