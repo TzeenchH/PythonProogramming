@@ -122,6 +122,7 @@ if __name__ == '__main__':
             print(report_dict[r])
         ch = chooser(variants)
     if ch == variants[2]:
-        csv_writer(report_dict, 'C:/Users/zenv9/OneDrive/Desktop/tmp/output.csv', headers)
+        path = input('Path to output file:')
+        csv_writer(report_dict, path, headers)
         print('That`s All Folks!')
         exit(0)
