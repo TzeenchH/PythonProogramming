@@ -1,3 +1,5 @@
+## Запуск тестов с формированием отчёта о покрытии
+```
 (Lab3) C:\Users\zenv9\OneDrive\Desktop\tmp\PythonProogramming\Lab3\WhatIsYearNowTests>python -m pytest --cov . --cov-report html
 ================================================================== test session starts ===================================================================
 platform win32 -- Python 3.8.5, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
@@ -12,3 +14,4 @@ Coverage HTML written to dir htmlcov
 
 
 =================================================================== 3 passed in 0.43s ====================================================================
+```
