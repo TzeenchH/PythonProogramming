@@ -1,4 +1,4 @@
-## Запуск тестов с формированием отчёта о покрытии
+## Результат запуска тестов с формированием отчёта о покрытии
 ```
 (Lab3) C:\Users\zenv9\OneDrive\Desktop\tmp\PythonProogramming\Lab3\WhatIsYearNowTests>python -m pytest --cov . --cov-report html
 ================================================================== test session starts ===================================================================
