@@ -20,17 +20,12 @@ def test_empty_tuple_raise_error():
 
 
 def test_same_cities_tuple_success():
-    cities = ['Tokyo', 'Tokyo', 'Tokyo']
-    expected = [
-        ('Tokyo', [1]),
-        ('Tokyo', [1]),
-        ('Tokyo', [1]),
-    ]
-    actual = one_hot_encoder.fit_transform(cities)
-    assert actual == expected
+   with pytest.raises(TypeError):
+        one_hot_encoder.fit_transform(1)
+
 
 
 def test_tuple_has_value_success():
     cities = ['Tokyo', 'Tokyo', 'Tokyo']
-    actual = one_hot_encoder.fit_transform(cities)
+    actual = one_hot_encoder.fit_transform(*cities)
     assert actual is not None

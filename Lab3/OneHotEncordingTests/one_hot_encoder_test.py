@@ -15,9 +15,7 @@ class TestOneHotEncoder(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_execute_zero_args_typeerror(self):
-        cities = []
-        result = one_hot_encoder.fit_transform(cities)
-        self.assertRaises(TypeError, result)
+        self.assertRaises(TypeError, one_hot_encoder.fit_transform, )
 
     def test_execute_same_cities_tuple(self):
         cities = ['Tokyo', 'Tokyo', 'Tokyo']
@@ -30,7 +28,4 @@ class TestOneHotEncoder(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_execute_four_cities_no_unexpected_indexes(self):
-        cities = ['Moscow', 'New York', 'Berlin', 'London']
-        actual = one_hot_encoder.fit_transform(cities)
-        self.assertIsNotNone(actual)
-        self.assertNotIn(('Moscow', [1, 0, 0, 0]), actual)
+        self.assertRaises(TypeError, one_hot_encoder.fit_transform, 1)
