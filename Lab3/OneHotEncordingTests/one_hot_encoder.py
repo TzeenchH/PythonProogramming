@@ -1,5 +1,5 @@
 from typing import List, Tuple
-
+import more_itertools
 
 def fit_transform(*args: str) -> List[Tuple[str, List[int]]]:
     """
@@ -8,7 +8,7 @@ def fit_transform(*args: str) -> List[Tuple[str, List[int]]]:
     """
     if len(args) == 0:
         raise TypeError('expected at least 1 arguments, got 0')
-
+    more_itertools.flatten(1)
     categories = args if isinstance(args[0], str) else list(args[0])
     uniq_categories = set(categories)
     bin_format = f'{{0:0{len(uniq_categories)}b}}'
