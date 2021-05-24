@@ -52,3 +52,22 @@ def test_incorrect_price_type_return_error():
     resp_json = json.loads(resp_str)
     with pytest.raises(TypeError):
         adv.convert_to_class(resp_json, adv.Advert)
+
+
+def test_incorrect_input_type_return_error():
+    with pytest.raises(AttributeError):
+        adv.convert_to_class("smth", adv.Advert)
+
+
+def test_invalid_class_return_error():
+    resp_str = """{
+               "title": "python",
+               "price": "abc",
+               "location": {
+                   "address": "город Москва, Лесная, 7",
+                   "metro_stations": ["Белорусская"]
+                   }
+               }"""
+    resp_json = json.loads(resp_str)
+    with pytest.raises(TypeError):
+        adv.convert_to_class(resp_json, "not adv")

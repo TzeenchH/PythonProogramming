@@ -48,10 +48,14 @@ def convert_to_class(json_response: dict, result: Advert) -> Advert:
     :param result: Advert class
     :return: new Advert class
     """
+    if not isinstance(result, Advert):
+        raise TypeError("invalid parameter result")
     tmp = result()
     for key, val in json_response.items():
         if isinstance(val, (list, tuple)):
-            tmp.__setattr__(key, [convert_to_class(subval, result) if isinstance(subval, dict) else subval for subval in
+            tmp.__setattr__(key, [convert_to_class(subtotal, result)
+                                  if isinstance(subtotal, dict)
+                                  else subtotal for subtotal in
                                   val])
         else:
             tmp.__setattr__(key, convert_to_class(val, result) if isinstance(val, dict) else val)
