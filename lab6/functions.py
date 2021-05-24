@@ -8,7 +8,10 @@ def ilen(coll: Iterable) -> int:
     >>> ilen(foo)
     10
     """
-    return len(list(coll))
+    counter = 0
+    for i in coll:
+        counter++
+    return counter
 
 
 def flatten(mas: Iterable[Any]) -> Iterable[Any]:
