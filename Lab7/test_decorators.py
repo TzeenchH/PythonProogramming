@@ -1,5 +1,5 @@
 import decorators
-
+import pytest
 
 def test_potentially_unsafe_ok():
     result = decorators.potentially_unsafe_func('name')
@@ -9,6 +9,11 @@ def test_potentially_unsafe_ok():
 def test_sum_of_values_ok():
     result = decorators.sum_of_two([1, 2])
     assert result == 3
+
+
+def test_sum_of_values_too_much_raise_error():
+    with pytest.raises(ValueError):
+        decorators.sum_of_two([1, 2, 30])
 
 
 def test_universal_sum_ok():
@@ -23,6 +28,11 @@ def test_universal_length_ok():
 def test_length_ok():
     result = decorators.some_msg("lorem ipsum")
     assert result == "Message was: lorem ipsum"
+
+
+def test_length_too_long_raise_error():
+    with pytest.raises(ValueError):
+        decorators.some_msg("lorem ipsum dores amen and another words")
 
 
 def test_process_text_ok():
